@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunito-sans-variable.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 300 900;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunito-sans-italic-variable.ttf") format("truetype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 300 900;
+}
+
+@theme {
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-deep-navy: #0f172a;
+  --color-fresh-green: #22c55e;
+  --color-energy-lime: #a3e635;
+  --color-soft-white: #f8fafc;
+  --color-slate-gray: #64748b;
+  --color-accent-orange: #fb923c;
+
+  --color-bg: #f8fafc;
+  --color-bg-deep: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-secondary: #475569;
+  --color-border: #e2e8f0;
+  --color-primary: #22c55e;
+  --color-primary-hover: #16a34a;
+  --color-soft-success: #dcfce7;
+  --color-soft-achievement: #ffedd5;
+  --color-achievement: #fb923c;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-soft: #fee2e2;
+
+  --radius-button: 14px;
+  --radius-card: 20px;
+  --radius-panel: 24px;
+
+  --shadow-soft: 0 16px 40px rgb(15 23 42 / 0.08);
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-bg-deep: #020617;
+  --color-surface: #1e293b;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-secondary: #cbd5e1;
+  --color-border: #334155;
+  --color-primary: #22c55e;
+  --color-primary-hover: #4ade80;
+  --color-soft-success: #14532d;
+  --color-soft-achievement: #431407;
+  --color-achievement: #fb923c;
+  --color-danger-soft: #450a0a;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-height: 100%;
+    background: var(--color-bg);
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--color-soft-success);
+    color: var(--color-text);
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: min(100% - 2rem, 1120px);
+    margin-inline: auto;
+  }
+
+  .focus-ring {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .focus-ring:focus-visible {
+    outline-color: var(--color-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 24%, transparent);
+  }
+}
