@@ -1,4 +1,5 @@
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Input } from "@/components/ui";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { FirebaseConnectionButton } from "@/features/firebase-connection/components/firebase-connection-button";
 
 const colorTokens = [
@@ -13,6 +14,9 @@ export default function Home() {
     <main className="min-h-screen py-8">
       <section className="container-page grid gap-6">
         <div className="rounded-panel border border-border bg-surface p-6 shadow-soft md:p-8">
+          <div className="mb-6 flex justify-end">
+            <ThemeToggle />
+          </div>
           <div className="max-w-3xl">
             <Badge variant="success">Theme foundation</Badge>
             <h1 className="mt-4 text-4xl font-extrabold leading-tight text-text md:text-5xl">

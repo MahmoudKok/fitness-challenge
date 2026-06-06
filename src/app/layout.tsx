@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InitialLoadingScreen } from "@/components/initial-loading-screen";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,10 +21,33 @@ type RootLayoutProps = Readonly<{
   children: React.ReactNode;
 }>;
 
+const themeScript = `
+(() => {
+  try {
+    const key = "fitness-challenge-theme";
+    const storedTheme = window.localStorage.getItem(key);
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = storedTheme === "dark" || storedTheme === "light"
+      ? storedTheme
+      : prefersDark
+        ? "dark"
+        : "light";
+
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
+  } catch {
+  }
+})();
+`;
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {children}
+        <InitialLoadingScreen />
+      </body>
     </html>
   );
 }
