@@ -1,4 +1,5 @@
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Input } from "@/components/ui";
+import { FirebaseConnectionButton } from "@/features/firebase-connection/components/firebase-connection-button";
 
 const colorTokens = [
   { name: "Primary", className: "bg-primary" },
@@ -29,10 +30,13 @@ export default function Home() {
             <CardHeader>
               <CardTitle>Actions</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-wrap gap-3">
-              <Button>Primary action</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="ghost">Ghost</Button>
+            <CardContent className="grid gap-4">
+              <div className="flex flex-wrap gap-3">
+                <Button>Primary action</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="ghost">Ghost</Button>
+              </div>
+              <FirebaseConnectionButton />
             </CardContent>
           </Card>
 
