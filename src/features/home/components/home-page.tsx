@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useSyncExternalStore } from "react";
 import {
   clearLocalRegisteredUser,
-  readLocalRegisteredUser,
+  parseLocalRegisteredUserSnapshot,
+  readLocalRegisteredUserSnapshot,
 } from "@/features/auth/lib/local-registration";
 
 function subscribeToLocalRegistration(onStoreChange: () => void) {
@@ -18,10 +19,14 @@ function subscribeToLocalRegistration(onStoreChange: () => void) {
 
 export function HomePage() {
   const router = useRouter();
-  const registeredUser = useSyncExternalStore(
+  const registeredUserSnapshot = useSyncExternalStore(
     subscribeToLocalRegistration,
-    readLocalRegisteredUser,
+    readLocalRegisteredUserSnapshot,
     () => null,
+  );
+  const registeredUser = useMemo(
+    () => parseLocalRegisteredUserSnapshot(registeredUserSnapshot),
+    [registeredUserSnapshot],
   );
 
   useEffect(() => {

@@ -28,6 +28,32 @@ export function readLocalRegisteredUser(): LocalRegisteredUser | null {
   }
 }
 
+export function readLocalRegisteredUserSnapshot() {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  return window.localStorage.getItem(LOCAL_REGISTERED_USER_KEY);
+}
+
+export function parseLocalRegisteredUserSnapshot(
+  storedUser: string | null,
+): LocalRegisteredUser | null {
+  if (!storedUser) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(storedUser) as LocalRegisteredUser;
+  } catch {
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(LOCAL_REGISTERED_USER_KEY);
+    }
+
+    return null;
+  }
+}
+
 export function saveLocalRegisteredUser(user: LocalRegisteredUser) {
   window.localStorage.setItem(LOCAL_REGISTERED_USER_KEY, JSON.stringify(user));
 }
