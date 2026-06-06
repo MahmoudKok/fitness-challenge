@@ -5,14 +5,45 @@ import { DEFAULT_GROUP_ID } from "./firestore-paths";
 export type FirestoreTimestamp = Timestamp | Date | FieldValue | string;
 export type DefaultGroupId = typeof DEFAULT_GROUP_ID;
 
+export type AuthProvider = string;
+export type UserStatus = "active";
+
+export type UserProfileDetails = {
+  heightCm: number | null;
+  weightKg: number | null;
+  goalWeightKg: number | null;
+  fitnessGoal: string | null;
+  activityLevel: string | null;
+};
+
+export type UserPreferences = {
+  measurementSystem: "metric";
+  notificationsEnabled: boolean;
+  dailyReminderTime: string | null;
+};
+
+export type UserOnboarding = {
+  completed: boolean;
+  completedAt: FirestoreTimestamp | null;
+  currentStep: string | null;
+};
+
 export type UserProfile = {
-  userId: string;
+  uid: string;
+  name: string;
   displayName: string;
   email: string | null;
-  photoURL: string | null;
+  photoUrl: string | null;
+  authProvider: AuthProvider;
+  authProviders: AuthProvider[];
   defaultGroupId: DefaultGroupId;
+  profile: UserProfileDetails;
+  preferences: UserPreferences;
+  onboarding: UserOnboarding;
+  status: UserStatus;
   createdAt: FirestoreTimestamp;
   updatedAt: FirestoreTimestamp;
+  lastLoginAt: FirestoreTimestamp;
 };
 
 export type GroupPenaltySettings = {
@@ -69,8 +100,10 @@ export type GroupMemberStats = {
 export type GroupMember = {
   userId: string;
   groupId: DefaultGroupId;
+  name: string;
   displayName: string;
-  photoURL: string | null;
+  email: string | null;
+  photoUrl: string | null;
   joinedAt: FirestoreTimestamp;
   updatedAt: FirestoreTimestamp;
   stats: GroupMemberStats;
