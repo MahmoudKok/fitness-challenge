@@ -1,8 +1,8 @@
-import type { Timestamp } from "firebase/firestore";
+import type { FieldValue, Timestamp } from "firebase/firestore";
 
 import { DEFAULT_GROUP_ID } from "./firestore-paths";
 
-export type FirestoreTimestamp = Timestamp | Date | string;
+export type FirestoreTimestamp = Timestamp | Date | FieldValue | string;
 export type DefaultGroupId = typeof DEFAULT_GROUP_ID;
 
 export type UserProfile = {
@@ -15,9 +15,44 @@ export type UserProfile = {
   updatedAt: FirestoreTimestamp;
 };
 
+export type GroupPenaltySettings = {
+  sugaryDrink: number;
+  sweets: number;
+  untrackedOutsideMeal: number;
+  caloriesOverLimit: number;
+  noLog: number;
+};
+
+export type GroupScoringSettings = {
+  workoutMaxPoints: number;
+  noSugarPoints: number;
+  noBreadPoints: number;
+  waterMaxPoints: number;
+  sleepMaxPoints: number;
+  logPoints: number;
+  penalties: GroupPenaltySettings;
+};
+
+export type GroupTargetSettings = {
+  defaultWaterLiters: number;
+  defaultSleepHours: number;
+};
+
+export type GroupSettings = {
+  dailyMaxPoints: number;
+  scoring: GroupScoringSettings;
+  targets: GroupTargetSettings;
+};
+
+export type GroupStatus = "active";
+
 export type Group = {
-  groupId: DefaultGroupId;
+  id: DefaultGroupId;
   name: string;
+  description: string;
+  ownerId: string | null;
+  settings: GroupSettings;
+  status: GroupStatus;
   createdAt: FirestoreTimestamp;
   updatedAt: FirestoreTimestamp;
 };
