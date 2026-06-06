@@ -12,7 +12,6 @@ import { syncUserAfterAuth } from "./auth-sync";
 
 type EmailSignUpOptions = {
   displayName?: string;
-  photoUrl?: string;
 };
 
 export async function signInWithGoogle(): Promise<UserCredential> {
@@ -34,10 +33,6 @@ export async function signUpWithEmailAndPassword(
 
   if (options.displayName) {
     profileUpdates.displayName = options.displayName;
-  }
-
-  if (options.photoUrl) {
-    profileUpdates.photoURL = options.photoUrl;
   }
 
   if (Object.keys(profileUpdates).length > 0) {

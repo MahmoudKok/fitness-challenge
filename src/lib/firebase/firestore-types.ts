@@ -33,7 +33,6 @@ export type UserProfile = {
   name: string;
   displayName: string;
   email: string | null;
-  photoUrl: string | null;
   authProvider: AuthProvider;
   authProviders: AuthProvider[];
   defaultGroupId: DefaultGroupId;
@@ -103,7 +102,6 @@ export type GroupMember = {
   name: string;
   displayName: string;
   email: string | null;
-  photoUrl: string | null;
   joinedAt: FirestoreTimestamp;
   updatedAt: FirestoreTimestamp;
   stats: GroupMemberStats;

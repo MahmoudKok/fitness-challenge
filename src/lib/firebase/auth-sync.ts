@@ -31,7 +31,6 @@ export async function ensureUserProfile(
     name: displayName,
     displayName,
     email: user.email,
-    photoUrl: user.photoURL,
     authProvider,
     authProviders: getAuthProviders(user, authProvider),
     updatedAt: timestamp,
@@ -41,7 +40,6 @@ export async function ensureUserProfile(
     | "name"
     | "displayName"
     | "email"
-    | "photoUrl"
     | "authProvider"
     | "authProviders"
     | "updatedAt"
@@ -90,11 +88,10 @@ export async function ensureDefaultGroupMember(user: User): Promise<void> {
     name: displayName,
     displayName,
     email: user.email,
-    photoUrl: user.photoURL,
     updatedAt: timestamp,
   } satisfies Pick<
     GroupMember,
-    "name" | "displayName" | "email" | "photoUrl" | "updatedAt"
+    "name" | "displayName" | "email" | "updatedAt"
   >;
 
   if (memberSnapshot.exists()) {
